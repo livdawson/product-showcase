@@ -10,6 +10,8 @@ export default function ProductList() {
   const [error, setError] = useState(null);
   const [timeRemaining, setTimeRemaining] = useState();
 
+  const highestRating = Math.max(...products.map(product => product.rating))
+
   const staleDataThreshold = 3 * 60
 
   useEffect(() => {
@@ -87,6 +89,7 @@ export default function ProductList() {
                 stock={product.stock}
                 image={product.images[0]}
                 timeRemaining={timeRemaining}
+                isHighestRated={product.rating === highestRating}
               />
             ))}
           </div>

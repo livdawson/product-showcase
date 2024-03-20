@@ -1,8 +1,6 @@
 import "./ProductCard.css";
 import ProductRating from "./ProductRating";
-import ProductTitle from "./ProductTitle";
 import ProductDescription from "./ProductDescription";
-import ProductPrice from "./ProductPrice";
 import ProductStock from "./ProductStock";
 import Button from "./Button";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -19,13 +17,30 @@ export default function ProductCard({
   stock,
   image,
   timeRemaining,
+  isHighestRated,
 }) {
+
+  if (title.charAt(0) === '-') {
+    title = title.slice(1);
+  }
+  
+  const capitalisedTitle = title
+  .split(" ")
+  .map((word) => word.slice(0, 1).toUpperCase(0) + word.slice(1))
+  .join(" ")
+
+  let formattedOriginalPrice = price.toFixed(2);
+  if (!formattedOriginalPrice.includes(".")) {
+    formattedOriginalPrice += ".00";
+  }
+
   const formattedNewPrice = (price * (1 - discountPercentage / 100)).toFixed(2);
 
   return (
-    <div className="product-card">
+    <div className={`product-card ${isHighestRated ? 'highest-rated' : ''}`}>
+      { isHighestRated ? <p className="product-card__recommended">Eclipse recommended</p> : null}
       <div className="product-card__div1">
-      <ProductTitle title={title} />
+      <h2 className="product-card__title">{capitalisedTitle}</h2>
       <ProductRating rating={rating} />
       </div>
       <div className="product-card__div2">
@@ -43,7 +58,12 @@ export default function ProductCard({
       <BarChartIcon className="product-card__icon"/>
         </div>
         <div className="product-card__div5">
-      <ProductPrice price={price} discountPercentage={discountPercentage} />
+      <p className="product-card__original-price">
+        {" "}
+        RRP £{formattedOriginalPrice}
+      </p>
+      <p className="product-card__discounted-price">£{formattedNewPrice}</p>
+      { isHighestRated ? <p className="product-card__amount-saved">Save £{parseInt(formattedOriginalPrice - formattedNewPrice)}</p> : null}
         </div>
         <div className="product-card__div6">
       <ProductStock availableStock={stock} />
