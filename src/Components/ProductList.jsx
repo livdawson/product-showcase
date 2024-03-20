@@ -9,6 +9,8 @@ export default function ProductList() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const staleDataThreshold = 3 * 60
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -16,7 +18,26 @@ export default function ProductList() {
         const filteredProducts = products.filter(
           (product) => product.brand !== "Apple"
         );
-        const selectedProducts = selectRandomProducts(filteredProducts, 10);
+        const lastRefreshTime = localStorage.getItem("lastRefreshTime");
+        const currentTime = new Date().getTime();
+        const timeSinceRefresh = (currentTime - parseInt(lastRefreshTime)) / 1000;
+        console.log(timeSinceRefresh)
+        
+        const selectedProducts = [];
+        if (timeSinceRefresh >= staleDataThreshold || !lastRefreshTime) {
+          selectedProducts.push(...selectRandomProducts(filteredProducts, 10));
+          localStorage.setItem(
+            "currentProducts",
+            JSON.stringify(selectedProducts)
+          );
+          localStorage.setItem("lastRefreshTime", currentTime.toString());
+        } else {
+          const savedProducts = JSON.parse(
+            localStorage.getItem("currentProducts")
+          );
+          selectedProducts.push(...savedProducts);
+        }
+
         selectedProducts.sort((a, b) => b.rating - a.rating);
         setProducts(selectedProducts);
         setIsLoading(false);
