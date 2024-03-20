@@ -7,6 +7,7 @@ import ProductStock from "./ProductStock";
 import Button from "./Button";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import DeliveryCountdown from "./DeliveryCountdown";
 
 export default function ProductCard({
   productID,
@@ -17,6 +18,7 @@ export default function ProductCard({
   rating,
   stock,
   image,
+  timeRemaining,
 }) {
   const formattedNewPrice = (price * (1 - discountPercentage / 100)).toFixed(2);
 
@@ -45,12 +47,13 @@ export default function ProductCard({
         </div>
         <div className="product-card__div6">
       <ProductStock availableStock={stock} />
+      <DeliveryCountdown timeRemaining={timeRemaining}/>
       <div className="div6__additional">
       {formattedNewPrice >= 100 ? (
         <p>
           <span
             className="material-icons"
-            style={{fontWeight: 'bold' }}
+            style={{fontWeight: 'bold', marginTop: 0 }}
             >
             done
           </span>
@@ -61,7 +64,7 @@ export default function ProductCard({
         <p>
           <span
             className="material-icons"
-            style={{fontWeight: "bold" }}
+            style={{fontWeight: "bold", marginTop: 0 }}
             >
             done
           </span>

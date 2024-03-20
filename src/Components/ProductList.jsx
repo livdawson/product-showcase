@@ -8,6 +8,7 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [timeRemaining, setTimeRemaining] = useState();
 
   const staleDataThreshold = 3 * 60
 
@@ -21,7 +22,7 @@ export default function ProductList() {
         const lastRefreshTime = localStorage.getItem("lastRefreshTime");
         const currentTime = new Date().getTime();
         const timeSinceRefresh = (currentTime - parseInt(lastRefreshTime)) / 1000;
-        console.log(timeSinceRefresh)
+
         
         const selectedProducts = [];
         if (timeSinceRefresh >= staleDataThreshold || !lastRefreshTime) {
@@ -31,13 +32,15 @@ export default function ProductList() {
             JSON.stringify(selectedProducts)
           );
           localStorage.setItem("lastRefreshTime", currentTime.toString());
+          setTimeRemaining(0)
         } else {
           const savedProducts = JSON.parse(
             localStorage.getItem("currentProducts")
           );
           selectedProducts.push(...savedProducts);
+          setTimeRemaining((staleDataThreshold - timeSinceRefresh))
         }
-
+      
         selectedProducts.sort((a, b) => b.rating - a.rating);
         setProducts(selectedProducts);
         setIsLoading(false);
@@ -48,6 +51,19 @@ export default function ProductList() {
     };
 
     fetchData();
+
+    const interval = setInterval(() => {
+      setTimeRemaining((prevTimeRemaining) => {
+        if (prevTimeRemaining > 0) {
+          return prevTimeRemaining - 1;
+        } else {
+          clearInterval(interval);
+          return prevTimeRemaining;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   if (error) {
@@ -70,6 +86,7 @@ export default function ProductList() {
                 rating={product.rating}
                 stock={product.stock}
                 image={product.images[0]}
+                timeRemaining={timeRemaining}
               />
             ))}
           </div>
