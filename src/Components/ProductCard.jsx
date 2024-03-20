@@ -22,24 +22,36 @@ export default function ProductCard({
 
   return (
     <div className="product-card">
+      <div className="product-card__div1">
+      <ProductTitle title={title} />
+      <ProductRating rating={rating} />
+      </div>
+      <div className="product-card__div2">
       <img
         src={image}
         alt={`product image for ${title}`}
         className="product-card__image"
-      />
-      <ProductTitle title={title} />
-      <ProductRating rating={rating} />
+        />
+        </div>
+        <div className="product-card__div3">
       <ProductDescription description={description} />
+        </div>
+        <div className="product-card__div4">
       <FavoriteIcon className="product-card__icon"/>
       <BarChartIcon className="product-card__icon"/>
+        </div>
+        <div className="product-card__div5">
       <ProductPrice price={price} discountPercentage={discountPercentage} />
+        </div>
+        <div className="product-card__div6">
       <ProductStock availableStock={stock} />
+      <div className="div6__additional">
       {formattedNewPrice >= 100 ? (
         <p>
           <span
             className="material-icons"
             style={{fontWeight: 'bold' }}
-          >
+            >
             done
           </span>
           FREE UK Delivery
@@ -50,12 +62,15 @@ export default function ProductCard({
           <span
             className="material-icons"
             style={{fontWeight: "bold" }}
-          >
+            >
             done
           </span>
           PayPal credit available
         </p>
       ) : null}
+      </div>
+      </div>
+      <div className="product-card__div7">
       <Button
         className="product-card__basket-button"
         text={
@@ -66,7 +81,8 @@ export default function ProductCard({
         onClick={() =>
           console.log(`Product ID: ${productID}, Price: £${formattedNewPrice}`)
         }
-      />
+        />
+        </div>
     </div>
   );
 }
