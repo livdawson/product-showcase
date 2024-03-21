@@ -230,6 +230,7 @@
 
   .product-card__image {
     max-width: 70%;
+    max-height: 350px;
     height: auto;
     margin: auto;
   }
