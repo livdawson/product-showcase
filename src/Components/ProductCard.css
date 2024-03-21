@@ -1,0 +1,253 @@
+/* General styling */
+
+.product-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 1rem;
+  grid-row-gap: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 8px 0px #b3b2b2;
+  margin: 1.5rem;
+  padding: 1rem;
+  max-width: 1000px;
+  height: 350px;
+}
+
+.product-card__div1 {
+  grid-area: 1 / 2 / 2 / 4;
+}
+
+.product-card__div2 {
+  grid-area: 1 / 1 / 4 / 2;
+  display: flex;
+  align-items: center;
+}
+
+.product-card__div3 {
+  grid-area: 2 / 2 / 3 / 4;
+}
+
+.product-card__div4 {
+  grid-area: 3 / 2 / 4 / 4;
+  display: flex;
+  align-items: center;
+}
+
+.product-card__div5 {
+  grid-area: 1 / 4 / 4 / 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.div5__additional p {
+  margin: 0.25rem 0;
+}
+
+/* Specific element styles */
+
+.product-card__image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.product-card__title {
+  margin-bottom: 0;
+}
+
+.product-card__rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.product-card__stars {
+  color: #ecbf1a;
+  margin-right: 10px;
+}
+
+.product-card__description {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-card__original-price {
+  color: grey;
+  text-decoration: line-through;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+.product-card__discounted-price {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.product-card__stock-bar {
+  margin-top: 1rem;
+}
+
+.redText {
+  color: red;
+}
+
+.product-card__basket-button {
+  background: linear-gradient(to right, #dc4da3, #901552);
+  color: white;
+  border: none;
+  padding: 0 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.product-card__basket-button .material-icons {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.product-card__basket-button p {
+  margin: 6px;
+}
+
+.product-card__icon {
+  color: rgba(169, 168, 168, 0.955);
+  outline: 1px solid currentColor;
+  margin: 3px;
+}
+
+.product-card__delivery-countdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.product-card__delivery-countdown .material-icons {
+  margin-right: 10px;
+}
+
+.product-card__delivery-countdown--highlighted {
+  font-weight: bold;
+}
+/* Highest rated product styling */
+
+.product-card__recommended {
+  position: absolute;
+  top: -16px;
+  left: 20px;
+  background-color: black;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.product-card.highest-rated {
+  box-shadow: 0 0 15px 5px rgb(186, 101, 159);
+  border: 1.5px solid black;
+}
+
+.product-card.highest-rated .product-card__discounted-price {
+  color: rgba(255, 0, 0, 0.8);
+}
+
+.product-card__amount-saved {
+  display: inline-block;
+  background-color: rgba(255, 192, 203, 0.833);
+  color: rgba(255, 0, 0, 0.8);
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 0;
+}
+
+/* Responsive styling */
+
+@media screen and (min-width: 900px) and (max-width: 1100px) {
+  .product-card {
+    max-height: none;
+  }
+
+  .product-card__basket-button {
+    padding: 0;
+  }
+
+  .product-card__basket-button p {
+    font-size: 0.75rem;
+  }
+
+  .product-card__basket-button .material-icons {
+    font-size: 1rem; 
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    margin: 1.5 rem;
+    max-width: 400px;
+    max-height: none;
+  }
+
+  .product-card__div1 {
+    order: 1;
+  }
+
+  .product-card__div2 {
+    order: 2;
+  }
+
+  .product-card__div3 {
+    order: 3;
+  }
+
+  .product-card__div4 {
+    display: none;
+  }
+
+  .product-card__div5 {
+    order: 4;
+  }
+
+  .product-card__div5 .div5__additional {
+    display: none;
+  }
+
+  .product-card__image {
+    max-width: 70%;
+    height: auto;
+    margin: auto;
+  }
+
+  .product-card__pricing--aligned {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  .product-card__amount-saved {
+    margin-left: 15px;
+    margin-bottom: 10px;
+  }
+
+  .product-card.highest-rated .product-card__div1 {
+    margin-top: 10px;
+  }
+}
