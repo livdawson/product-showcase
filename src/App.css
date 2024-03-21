@@ -2,7 +2,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin: 0 auto;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 .error {
@@ -18,4 +20,17 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 24px;
+}
+
+.loading .fas {
+  margin-right: 8px;
 }
