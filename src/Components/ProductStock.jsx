@@ -9,10 +9,11 @@ export default function ProductStock({ availableStock }) {
   const textStyle = stockText === "Last few left" ? "redText" : "";
 
   return (
-    <div>
+    <div className="product-card__stock-bar">
       <LinearProgress
         variant="determinate"
         value={stockLevelPercentage}
+        aria-label={`Stock Level: ${stockLevelPercentage.toFixed(2)}%`}
         sx={{
           ".MuiLinearProgress-barColorPrimary": {
             backgroundColor: barColor,
