@@ -74,7 +74,7 @@ export default function ProductList() {
     return (
       <main>
         {isLoading ? (
-          <p>Fetching products...</p>
+          <p className="loading"><span class="fas fa-spinner fa-spin"></span> Fetching products...</p>
         ) : (
           <div>
             {products.map((product) => (
