@@ -1,5 +1,5 @@
 export default function ProductDescription({ description }) {
-    const descriptionItems = description.split(/\| |• |\. |- /);
+  const descriptionItems = description.split(/(?<=\s), |\| |• |\. |- /);
   
     return (
       <ul className="product-card__description">
