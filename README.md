@@ -27,7 +27,7 @@ npm install
 
 3. Start the development server:
 ```bash
-npm run dev. 
+npm run dev
 ```
 
 NOTE: By default, the app should be accessible on localhost:5173. However, your terminal will confirm which network port the app is running on.
